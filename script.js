@@ -43,6 +43,10 @@ window.addEventListener("load", function () {
       this.image = document.getElementById("playerImage");
       this.frameX = 0;
       this.frameY = 0;
+      this.maxFrame = 8;
+      this.fps = 20;
+      this.frameTimer = 0;
+      this.frameInterval = 1000 / this.fps;
       this.speed = 0;
       this.yVelocity = 0;
       this.weight = 1;
@@ -60,8 +64,17 @@ window.addEventListener("load", function () {
         this.height
       );
     }
-    update(input) {
-      // remove movement on x axis
+    update(input, deltaTime) {
+      // sprite animation
+      if (this.frameTimer > this.frameInterval) {
+        if (this.frameX >= this.maxFrame) this.frameX = 0;
+        else this.frameX++;
+        this.frameTimer = 0;
+      } else {
+        this.frameTimer += deltaTime;
+      }
+
+      // controls (remove movement on x axis?)
       if (input.keys.indexOf("ArrowRight") > -1) {
         this.speed = 5;
       } else if (input.keys.indexOf("ArrowLeft") > -1) {
@@ -71,18 +84,22 @@ window.addEventListener("load", function () {
       } else {
         this.speed = 0;
       }
+
       // horizontal movement
       this.x += this.speed;
       if (this.x < 0) this.x = 0;
       else if (this.x > this.gameWidth - this.width)
         this.x = this.gameWidth - this.width;
+
       // vertical movement
       this.y += this.yVelocity;
       if (!this.onGround()) {
         this.yVelocity += this.weight;
+        this.maxFrame = 5;
         this.frameY = 1;
       } else {
         this.yVelocity = 0;
+        this.maxFrame = 8;
         this.frameY = 0;
       }
       if (this.y > this.gameHeight - this.height)
@@ -102,7 +119,7 @@ window.addEventListener("load", function () {
       this.y = 0;
       this.width = 2400;
       this.height = 700;
-      this.speed = 8;
+      this.speed = 5;
     }
     draw(context) {
       context.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -128,7 +145,7 @@ window.addEventListener("load", function () {
       this.height = 119;
       this.image = document.getElementById("enemyImage");
       this.x = this.gameWidth;
-      this.y = this.gameHeight - this.height - 20;
+      this.y = this.gameHeight - this.height;
       this.frameX = 0;
       this.frameY = 0;
       this.maxFrame = 5;
@@ -195,7 +212,7 @@ window.addEventListener("load", function () {
     background.draw(ctx);
     background.update();
     player.draw(ctx);
-    player.update(input);
+    player.update(input, deltaTime);
     handleEnemies(deltaTime);
     requestAnimationFrame(animate);
   }
