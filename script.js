@@ -80,8 +80,10 @@ window.addEventListener("load", function () {
       this.y += this.yVelocity;
       if (!this.onGround()) {
         this.yVelocity += this.weight;
+        this.frameY = 1;
       } else {
         this.yVelocity = 0;
+        this.frameY = 0;
       }
       if (this.y > this.gameHeight - this.height)
         this.y = this.gameHeight - this.height;
