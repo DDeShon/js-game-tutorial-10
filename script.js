@@ -3,6 +3,7 @@ window.addEventListener("load", function () {
   const ctx = canvas.getContext("2d");
   canvas.width = 800;
   canvas.height = 720;
+  let enemies = [];
 
   class InputHandler {
     constructor() {
@@ -120,9 +121,43 @@ window.addEventListener("load", function () {
     }
   }
 
-  class Enemy {}
+  class Enemy {
+    constructor(gameWidth, gameHeight) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
+      this.width = 160;
+      this.height = 119;
+      this.image = document.getElementById("enemyImage");
+      this.x = this.gameWidth;
+      this.y = this.gameHeight - this.height - 20;
+      this.frameX = 0;
+      this.frameY = 0;
+    }
+    draw(context) {
+      context.drawImage(
+        this.image,
+        this.frameX * this.width,
+        this.frameY,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
+    update() {
+      this.x--;
+    }
+  }
 
-  function handleEnemies() {}
+  enemies.push(new Enemy(canvas.width, canvas.height));
+  function handleEnemies() {
+    enemies.forEach((enemy) => {
+      enemy.draw(ctx);
+      enemy.update();
+    });
+  }
 
   function displayStatusText() {}
 
@@ -136,6 +171,7 @@ window.addEventListener("load", function () {
     background.update();
     player.draw(ctx);
     player.update(input);
+    handleEnemies();
     requestAnimationFrame(animate);
   }
   animate();
