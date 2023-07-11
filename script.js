@@ -242,6 +242,18 @@ window.addEventListener("load", function () {
     context.fillText("Score: " + score, 20, 50);
     context.fillStyle = "white";
     context.fillText("Score: " + score, 22, 52);
+    if (gameOver) {
+      context.font = "60px Helvetica";
+      context.textAlign = "center";
+      context.fillStyle = "black";
+      context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+      context.fillStyle = "red";
+      context.fillText(
+        "GAME OVER",
+        canvas.width / 2 + 2,
+        canvas.height / 2 + 2
+      );
+    }
   }
 
   const input = new InputHandler();
@@ -263,7 +275,7 @@ window.addEventListener("load", function () {
     player.update(input, deltaTime, enemies);
     handleEnemies(deltaTime);
     displayStatusText(ctx);
-    requestAnimationFrame(animate);
+    if (!gameOver) requestAnimationFrame(animate);
   }
   animate(0);
 });
