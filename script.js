@@ -54,17 +54,6 @@ window.addEventListener("load", function () {
       this.weight = 1;
     }
     draw(context) {
-      context.strokeStyle = "white";
-      context.strokeRect(this.x, this.y, this.width, this.height);
-      context.beginPath();
-      context.arc(
-        this.x + this.width / 2,
-        this.y + this.height / 2,
-        this.width / 2,
-        0,
-        Math.PI * 2
-      );
-      context.stroke();
       context.drawImage(
         this.image,
         this.frameX * this.width,
@@ -80,8 +69,9 @@ window.addEventListener("load", function () {
     update(input, deltaTime, enemies) {
       // collision detection
       enemies.forEach((enemy) => {
-        const distanceX = enemy.x - this.x;
-        const distanceY = enemy.y - this.y;
+        const distanceX = enemy.x + enemy.width / 2 - (this.x + this.width / 2);
+        const distanceY =
+          enemy.y + enemy.height / 2 - (this.y + this.height / 2);
         const distance = Math.sqrt(
           distanceX * distanceX + distanceY * distanceY
         );
@@ -180,17 +170,6 @@ window.addEventListener("load", function () {
       this.markedForDeletion = false;
     }
     draw(context) {
-      context.strokeStyle = "white";
-      context.strokeRect(this.x, this.y, this.width, this.height);
-      context.beginPath();
-      context.arc(
-        this.x + this.width / 2,
-        this.y + this.height / 2,
-        this.width / 2,
-        0,
-        Math.PI * 2
-      );
-      context.stroke();
       context.drawImage(
         this.image,
         this.frameX * this.width,
