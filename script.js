@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  canvas.width = 800;
+  canvas.width = 1400;
   canvas.height = 720;
   let enemies = [];
   let score = 0;
@@ -40,7 +40,7 @@ window.addEventListener("load", function () {
       this.gameHeight = gameHeight;
       this.width = 200;
       this.height = 200;
-      this.x = 0;
+      this.x = 100;
       this.y = this.gameHeight - this.height;
       this.image = document.getElementById("playerImage");
       this.frameX = 0;
@@ -122,6 +122,12 @@ window.addEventListener("load", function () {
     onGround() {
       return this.y >= this.gameHeight - this.height;
     }
+    restart() {
+      this.x = 100;
+      this.y = this.gameHeight - this.height;
+      this.maxFrame = 8;
+      this.frameY = 0;
+    }
   }
 
   class Background {
@@ -148,6 +154,9 @@ window.addEventListener("load", function () {
     update() {
       this.x -= this.speed;
       if (this.x < 0 - this.width) this.x = 0;
+    }
+    restart() {
+      this.x = 0;
     }
   }
 
@@ -233,6 +242,14 @@ window.addEventListener("load", function () {
         canvas.height / 2 + 2
       );
     }
+  }
+
+  function restartGame() {
+    player.restart();
+    background.restart();
+    enemies = [];
+    score = 0;
+    gameOver = false;
   }
 
   const input = new InputHandler();
