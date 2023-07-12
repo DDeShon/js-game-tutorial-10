@@ -19,7 +19,7 @@ window.addEventListener("load", function () {
           this.keys.indexOf(e.key) === -1
         ) {
           this.keys.push(e.key);
-        }
+        } else if (e.key === "Enter" && gameOver) restartGame();
       });
       window.addEventListener("keyup", (e) => {
         if (
@@ -250,6 +250,7 @@ window.addEventListener("load", function () {
     enemies = [];
     score = 0;
     gameOver = false;
+    animate(0);
   }
 
   const input = new InputHandler();
