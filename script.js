@@ -234,10 +234,14 @@ window.addEventListener("load", function () {
       context.font = "60px Helvetica";
       context.textAlign = "center";
       context.fillStyle = "black";
-      context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+      context.fillText(
+        "GAME OVER! Press ENTER to restart.",
+        canvas.width / 2,
+        canvas.height / 2
+      );
       context.fillStyle = "red";
       context.fillText(
-        "GAME OVER",
+        "GAME OVER! Press ENTER to restart.",
         canvas.width / 2 + 2,
         canvas.height / 2 + 2
       );
