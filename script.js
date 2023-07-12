@@ -31,6 +31,15 @@ window.addEventListener("load", function () {
           this.keys.splice(this.keys.indexOf(e.key), 1);
         }
       });
+      window.addEventListener("touchstart", (e) => {
+        console.log("start");
+      });
+      window.addEventListener("touchmove", (e) => {
+        console.log("moving");
+      });
+      window.addEventListener("touchend", (e) => {
+        console.log("end");
+      });
     }
   }
 
@@ -211,7 +220,6 @@ window.addEventListener("load", function () {
   function handleEnemies(deltaTime) {
     if (enemyTimer > enemyInterval + randomEnemyInterval) {
       enemies.push(new Enemy(canvas.width, canvas.height));
-      console.log(enemies);
       randomEnemyInterval = Math.random() * 1000 + 500;
       enemyTimer = 0;
     } else {
