@@ -46,9 +46,10 @@ window.addEventListener("load", function () {
         else if (
           swipeDistance > this.touchThreshold &&
           this.keys.indexOf("swipe down") === -1
-        )
+        ) {
           this.keys.push("swipe down");
-        if (gameOver) restartGame();
+          if (gameOver) restartGame();
+        }
       });
       window.addEventListener("touchend", (e) => {
         this.keys.splice(this.keys.indexOf("swipe up"), 1);
