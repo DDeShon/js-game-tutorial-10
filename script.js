@@ -32,13 +32,13 @@ window.addEventListener("load", function () {
         }
       });
       window.addEventListener("touchstart", (e) => {
-        console.log("start");
+        console.log(e.changedTouches[0].pageY);
       });
       window.addEventListener("touchmove", (e) => {
-        console.log("moving");
+        console.log(e.changedTouches[0].pageY);
       });
       window.addEventListener("touchend", (e) => {
-        console.log("end");
+        console.log(e.changedTouches[0].pageY);
       });
     }
   }
