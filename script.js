@@ -48,9 +48,9 @@ window.addEventListener("load", function () {
           this.keys.indexOf("swipe down") === -1
         )
           this.keys.push("swipe down");
+        if (gameOver) restartGame();
       });
       window.addEventListener("touchend", (e) => {
-        console.log(this.keys);
         this.keys.splice(this.keys.indexOf("swipe up"), 1);
         this.keys.splice(this.keys.indexOf("swipe down"), 1);
       });
