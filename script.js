@@ -79,6 +79,17 @@ window.addEventListener("load", function () {
       this.weight = 1;
     }
     draw(context) {
+      context.lineWidth = 5;
+      context.strokeStyle = "white";
+      context.beginPath();
+      context.arc(
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        this.width / 2,
+        0,
+        Math.PI * 2
+      );
+      context.stroke();
       context.drawImage(
         this.image,
         this.frameX * this.width,
@@ -208,6 +219,17 @@ window.addEventListener("load", function () {
       this.markedForDeletion = false;
     }
     draw(context) {
+      context.lineWidth = 5;
+      context.strokeStyle = "white";
+      context.beginPath();
+      context.arc(
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        this.width / 2,
+        0,
+        Math.PI * 2
+      );
+      context.stroke();
       context.drawImage(
         this.image,
         this.frameX * this.width,
@@ -296,7 +318,7 @@ window.addEventListener("load", function () {
       document.exitFullscreen();
     }
   }
-  toggleFullScreen();
+  fullScreenButton.addEventListener("click", toggleFullScreen);
 
   const input = new InputHandler();
   const player = new Player(canvas.width, canvas.height);
