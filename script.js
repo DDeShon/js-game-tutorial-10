@@ -112,12 +112,16 @@ window.addEventListener("load", function () {
         this.frameTimer += deltaTime;
       }
 
-      // controls (remove movement on x axis?)
+      // controls (TODO = remove movement on x axis?)
       if (input.keys.indexOf("ArrowRight") > -1) {
         this.speed = 5;
       } else if (input.keys.indexOf("ArrowLeft") > -1) {
         this.speed = -5;
-      } else if (input.keys.indexOf("ArrowUp") > -1 && this.onGround()) {
+      } else if (
+        (input.keys.indexOf("ArrowUp") > -1 ||
+          input.keys.indexOf("swipe up") > -1) &&
+        this.onGround()
+      ) {
         this.yVelocity -= 32;
       } else {
         this.speed = 0;
@@ -254,17 +258,18 @@ window.addEventListener("load", function () {
     context.fillStyle = "white";
     context.fillText("Score: " + score, 22, 52);
     if (gameOver) {
-      context.font = "60px Helvetica";
+      // TODO = dim background
+      context.font = "50px Helvetica";
       context.textAlign = "center";
       context.fillStyle = "black";
       context.fillText(
-        "GAME OVER, press ENTER to restart!",
+        "GAME OVER, press ENTER or swipe down to restart!",
         canvas.width / 2,
         canvas.height / 2
       );
       context.fillStyle = "red";
       context.fillText(
-        "GAME OVER, press ENTER to restart!",
+        "GAME OVER, press ENTER or swipe down to restart!",
         canvas.width / 2 + 2,
         canvas.height / 2 + 2
       );
